@@ -9,6 +9,7 @@ app = FastAPI()
 
 @app.post("/callback")
 async def handle_callback(request: Request):
+    print(request)
     content_type = request.headers['Content-Type']
     if content_type == 'application/xml':
         body = await request.body()
