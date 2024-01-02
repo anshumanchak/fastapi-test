@@ -28,4 +28,4 @@ async def receive_notification(request: Request):
     print("Hub Challenge:", hub_challenge)
     print("Hub Mode:", hub_mode)
     print("Hub Lease Seconds:", hub_lease_seconds)
-    return {"hub_challenge": hub_challenge}
+    return hub_challenge
