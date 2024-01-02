@@ -13,3 +13,7 @@ async def receive_notification(feed_data: AtomFeed):
     print("Received Atom Feed Data:")
     print(received_data)
     return {"received_data": received_data}
+
+@app.get("/")
+async def print_root():
+    return "Hi, you are inside disag"
