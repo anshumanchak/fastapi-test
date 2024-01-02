@@ -1,6 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
-import xml.etree.ElementTree as ET
+# import xml.etree.ElementTree as ET
 
 app = FastAPI()
 
@@ -19,7 +19,13 @@ async def print_root():
     return "Hi, you are inside disag"
 
 @app.get("/callback")
-async def receive_notification(youtube_form_data):
-    print("Received Data:")
-    print(youtube_form_data)
-    return {"received_data": youtube_form_data}
+async def receive_notification(request: Request):
+    hub_topic = request.query_params.get('hub.topic')
+    hub_challenge = request.query_params.get('hub.challenge')
+    hub_mode = request.query_params.get('hub.mode')
+    hub_lease_seconds = request.query_params.get('hub.lease_seconds')
+    print("Hub Topic:", hub_topic)
+    print("Hub Challenge:", hub_challenge)
+    print("Hub Mode:", hub_mode)
+    print("Hub Lease Seconds:", hub_lease_seconds)
+    return {"hub_challenge": hub_challenge}
