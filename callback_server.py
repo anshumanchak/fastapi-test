@@ -11,7 +11,7 @@ app = FastAPI()
 async def handle_callback(request: Request):
     try:
         print("Received XML Data:")
-        body_bytes = request.data
+        body_bytes = request.raw_post
         print(body_bytes)
         # body_str = body_bytes.decode("utf-8")
         # print(body_str)
