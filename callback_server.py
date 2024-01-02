@@ -8,11 +8,13 @@ app = FastAPI()
 #     data: str
 
 @app.post("/callback")
-async def handle_callback(request: Request):
-    print(request)
-    content_type = request.headers['Content-Type']
+async def handle_callback(response: Response):
+    print(response)
+    content_type = response.headers['Content-Type']
+    print(content_type)
+    print(response.body())
     if content_type == 'application/xml':
-        body = await request.body()
+        body = await response.body()
         return Response(content=body, media_type="application/xml")
     else:
         raise HTTPException(status_code=400, detail=f'Content type {content_type} not supported')
