@@ -8,7 +8,7 @@ class AtomFeed(BaseModel):
     data: str
 
 @app.post("/callback")
-async def receive_notification(feed_data: AtomFeed):
+async def yt_notification(feed_data: AtomFeed):
     received_data = feed_data.data
     print("Received Atom Feed Data:")
     print(received_data)
