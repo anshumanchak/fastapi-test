@@ -8,11 +8,14 @@ app = FastAPI()
 #     data: str
 
 @app.post("/callback")
-async def yt_notification(feed_data: str):
-    received_data = feed_data
-    print("Received Atom Feed Data:")
-    print(received_data)
-    return {"received_data": received_data}
+async def handle_callback(xml_data: bytes):
+    try:
+        decoded_xml = xml_data.decode("utf-8")
+        print("Received XML Data:")
+        print(decoded_xml)
+        return {"message": "XML data received and processed successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Error processing XML data")
 
 @app.get("/")
 async def print_root():
