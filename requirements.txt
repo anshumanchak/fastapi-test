@@ -1,2 +1,7 @@
 fastapi
 uvicorn
+pydantic
+py-xml
+lxml
+requests
+gunicorn
