@@ -11,9 +11,10 @@ app = FastAPI()
 async def handle_callback(request: Request):
     body_bytes = request.body
     print(body_bytes)
+    xml = request.query_params.get('body')
     # body_str = body_bytes.decode("utf-8")
     # print(body_str)
-    return Response(content=body_bytes)
+    return body_bytes
 
 @app.get("/")
 async def print_root():
