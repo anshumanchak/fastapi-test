@@ -9,7 +9,7 @@ app = FastAPI()
 
 @app.post("/callback")
 async def handle_callback(response: Response):
-    body_bytes = await response.body
+    body_bytes = response.body
     print(body_bytes)
     # body_str = body_bytes.decode("utf-8")
     # print(body_str)
