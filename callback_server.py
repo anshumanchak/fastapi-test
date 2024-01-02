@@ -13,8 +13,8 @@ async def handle_callback(request: Request):
         print("Received XML Data:")
         body_bytes = await request.body()
         print(body_bytes)
-        body_json = await request.json()
-        print(body_json)
+        # body_json = await request.json()
+        # print(body_json)
         # body_str = body_bytes.decode("utf-8")
         # print(body_str)
         return {"message": "XML data received and processed successfully"}
