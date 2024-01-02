@@ -4,12 +4,12 @@ from pydantic import BaseModel
 
 app = FastAPI()
 
-class AtomFeed(BaseModel):
-    data: str
+# class AtomFeed(BaseModel):
+#     data: str
 
 @app.post("/callback")
-async def yt_notification(feed_data: AtomFeed):
-    received_data = feed_data.data
+async def yt_notification(feed_data: str):
+    received_data = feed_data
     print("Received Atom Feed Data:")
     print(received_data)
     return {"received_data": received_data}
