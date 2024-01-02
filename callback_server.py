@@ -11,13 +11,14 @@ app = FastAPI()
 async def handle_callback(request: Request):
     try:
         body_bytes = request.body
+        print(body_bytes)
         body_str = body_bytes.decode("utf-8")
         print("Received XML Data:")
         print(body_str)
         return {"message": "XML data received and processed successfully"}
     
     except Exception as e:
-        # Handle any exceptions or errors that might occur during processing
+        print(str(e))
         return {"error": str(e)}
 
 @app.get("/")
