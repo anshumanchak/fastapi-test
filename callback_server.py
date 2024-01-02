@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, Response, Request, HTTPException
 from pydantic import BaseModel
 # import xml.etree.ElementTree as ET
 
@@ -8,14 +8,13 @@ app = FastAPI()
 #     data: str
 
 @app.post("/callback")
-async def handle_callback(xml_data: bytes):
-    try:
-        decoded_xml = xml_data.decode("utf-8")
-        print("Received XML Data:")
-        print(decoded_xml)
-        return {"message": "XML data received and processed successfully"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail="Error processing XML data")
+async def handle_callback(request: Request):
+    content_type = request.headers['Content-Type']
+    if content_type == 'application/xml':
+        body = await request.body()
+        return Response(content=body, media_type="application/xml")
+    else:
+        raise HTTPException(status_code=400, detail=f'Content type {content_type} not supported')
 
 @app.get("/")
 async def print_root():
